@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Painter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="container">
+        <!-- Video is the background — CSS mirrors it so it feels like a mirror -->
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="drawCanvas"></canvas>
+        <canvas id="overlayCanvas"></canvas>
+        <div id="cursor"></div>
+        <svg id="clearRing" width="80" height="80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,200,50,0.85)" stroke-width="3"
+                stroke-dasharray="213" stroke-dashoffset="213" id="clearArc" stroke-linecap="round"
+                transform="rotate(-90 40 40)" />
+        </svg>
+        <div id="toolbar">
+            <button class="tool-btn active" id="btn-draw" title="Draw (D)">✏️</button>
+            <button class="tool-btn" id="btn-erase" title="Erase (E)">🧹</button>
+            <button class="tool-btn" id="btn-undo" title="Undo (Ctrl+Z)">↩️</button>
+            <button class="tool-btn" id="btn-clear" title="Clear (C)">🗑️</button>
+            <button class="tool-btn" id="btn-save" title="Save (S)">💾</button>
+            <div class="divider"></div>
+            <div class="color-swatch active" data-color="#ffffff" style="background:#ffffff"></div>
+            <div class="color-swatch" data-color="#ff3366" style="background:#ff3366"></div>
+            <div class="color-swatch" data-color="#ff9500" style="background:#ff9500"></div>
+            <div class="color-swatch" data-color="#ffe000" style="background:#ffe000"></div>
+            <div class="color-swatch" data-color="#00ff99" style="background:#00ff99"></div>
+            <div class="color-swatch" data-color="#00d4ff" style="background:#00d4ff"></div>
+            <div class="color-swatch" data-color="#a855f7" style="background:#a855f7"></div>
+            <div class="color-swatch" data-color="#ff69b4" style="background:#ff69b4"></div>
+            <div class="color-swatch" data-color="#111111" style="background:#222;border-color:rgba(255,255,255,0.4)">
+            </div>
+            <div class="divider"></div>
+            <span id="sizeLabel">SIZE</span>
+            <input type="range" id="brushSize" min="3" max="45" value="8">
+        </div>
+        <div id="status">SHOW YOUR HAND</div>
+        <div id="guide">
+            ☝️ <b>Index only</b> → DRAW<br>
+            ✌️ <b>Index + Middle</b> → PAUSE (lift pen)<br>
+            🤙 <b>Thumb + Pinky</b> → ERASE<br>
+            ✋ <b>Open hand</b> (hold) → CLEAR ALL
+        </div>
+        <div id="loading">STARTING CAMERA<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </div>
+    </div>
+
+    <!-- External libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <!-- Application modules -->
+    <script src="state.js"></script>
+    <script src="gesture.js"></script>
+    <script src="history.js"></script>
+    <script src="drawing.js"></script>
+    <script src="skeleton.js"></script>
+    <script src="cursor.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
